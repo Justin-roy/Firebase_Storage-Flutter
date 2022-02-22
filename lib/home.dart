@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String downloadlink = 'Getting Download Link....';
   // Getting File From Storage...
   File? file;
   Future selectFile() async {
@@ -42,6 +43,9 @@ class _HomePageState extends State<HomePage> {
         await FirebaseStorage.instance.ref('files/$filename').getDownloadURL();
 
     print('Download URL:- $downloadURL');
+    setState(() {
+      downloadlink = downloadURL;
+    });
   }
 
   @override
@@ -55,6 +59,31 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: [
             const Spacer(),
+            file == null
+                ? const Text(
+                    'No Download Link Available !!',
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                    textAlign: TextAlign.center,
+                  )
+                : Container(
+                    height: MediaQuery.of(context).size.width / 2,
+                    width: MediaQuery.of(context).size.width,
+                    padding: const EdgeInsets.all(8),
+                    margin: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    child: SelectableText(
+                      downloadlink,
+                      style: const TextStyle(
+                        fontSize: 18,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+            const SizedBox(height: 10),
             SizedBox(
               height: 60,
               width: MediaQuery.of(context).size.width / 1.2,
