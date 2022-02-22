@@ -1,6 +1,6 @@
 # Firebase Storage Flutter
 
-Simple Firebase Storage Application It's Your File From Local Storage And Upload It to Firebase..
+Simple Firebase Storage Application It's Take Your File From Local Storage And Upload It to Firebase..
 
 A new Flutter project.
 
