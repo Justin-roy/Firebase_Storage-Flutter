@@ -106,17 +106,21 @@ class _HomePageState extends State<HomePage> {
               width: MediaQuery.of(context).size.width / 1.2,
               child: ElevatedButton(
                 onPressed: () async {
-                  await uploadFile();
-                  // Showing message to user
-                  final snackBar = SnackBar(
-                    content: const Text('File Uploaded To Firebase!'),
-                    action: SnackBarAction(
-                      label: 'Undo',
-                      onPressed: () {},
-                    ),
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  downloadURL();
+                  if (file != null) {
+                    await uploadFile();
+                    // Showing message to user
+                    final snackBar = SnackBar(
+                      content: const Text('File Uploaded To Firebase!'),
+                      action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {},
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                    downloadURL();
+                  } else {
+                    return;
+                  }
                 },
                 child: const Text('Upload File'),
               ),
